@@ -31,6 +31,26 @@ public class DoubleChainList<T> {
         listSize++;
     }
 
+    public void add(int index, T element){
+        DoubleNode<T> auxiliarNode = getNode(index);
+        DoubleNode<T> newNode = new DoubleNode<>(element);
+        newNode.setNextNode(auxiliarNode);
+
+        if (newNode.getNextNode() != null){
+            newNode.setPreviousNode(auxiliarNode.getPreviousNode());
+            newNode.getNextNode().setPreviousNode(newNode);
+        }else{
+            newNode.setPreviousNode(lastNode);
+            lastNode = newNode;
+        }
+        if (index == 0){
+            firstNode = newNode;
+        }else{
+            newNode.getPreviousNode().setNextNode(newNode);
+        }
+        listSize++;
+    }
+
     private DoubleNode<T> getNode(int index){
         DoubleNode<T> auxiliarNode = firstNode;
         for (int i = 0; (i < index) && (auxiliarNode != null); i++) {
