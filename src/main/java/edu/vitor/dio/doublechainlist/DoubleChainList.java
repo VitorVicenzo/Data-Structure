@@ -51,6 +51,25 @@ public class DoubleChainList<T> {
         listSize++;
     }
 
+    public void remove(int index){
+        if(index == 0){
+            firstNode = firstNode.getNextNode();
+            if(firstNode != null){
+                firstNode.setPreviousNode(null);
+            }
+        }else{
+            DoubleNode<T> auxiliarNode = getNode(index);
+            auxiliarNode.getPreviousNode().setNextNode(auxiliarNode.getNextNode());
+            if (auxiliarNode != lastNode){
+                auxiliarNode.getNextNode().setPreviousNode(auxiliarNode.getPreviousNode());
+            }else{
+                lastNode = auxiliarNode;
+            }
+        }
+
+        this.listSize--;
+    }
+
     private DoubleNode<T> getNode(int index){
         DoubleNode<T> auxiliarNode = firstNode;
         for (int i = 0; (i < index) && (auxiliarNode != null); i++) {
