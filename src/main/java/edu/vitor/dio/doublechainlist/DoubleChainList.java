@@ -82,5 +82,15 @@ public class DoubleChainList<T> {
         return this.listSize;
     }
 
-
+    @Override
+    public String toString() {
+        String returnStr = "";
+        DoubleNode<T> auxiliarNode = firstNode;
+        for (int i = 0; i <size(); i++) {
+            returnStr += "{Node(content=" + auxiliarNode.getContent() + ")} ---->";
+            auxiliarNode = auxiliarNode.getNextNode();
+        }
+        returnStr += "null";
+        return returnStr;
+    }
 }
