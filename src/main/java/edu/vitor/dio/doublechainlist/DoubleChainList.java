@@ -17,6 +17,20 @@ public class DoubleChainList<T> {
         return this.getNode(index).getContent();
     }
 
+    public void add(T element){
+        DoubleNode<T> newNode = new DoubleNode<>(element);
+        newNode.setNextNode(null);
+        newNode.setPreviousNode(lastNode);
+        if (firstNode == null){
+            firstNode = newNode;
+        }
+        if (lastNode != null){
+             lastNode.setNextNode(newNode);
+        }
+        lastNode = newNode;
+        listSize++;
+    }
+
     private DoubleNode<T> getNode(int index){
         DoubleNode<T> auxiliarNode = firstNode;
         for (int i = 0; (i < index) && (auxiliarNode != null); i++) {
@@ -26,7 +40,7 @@ public class DoubleChainList<T> {
     }
 
     public int size(){
-        return listSize;
+        return this.listSize;
     }
 
 
